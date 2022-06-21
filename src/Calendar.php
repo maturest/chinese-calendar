@@ -602,6 +602,8 @@ class Calendar
 
         $offset = $this->dateDiff($date, '1900-01-31')->days;
 
+        //dd($offset);
+
         for ($i = 1900; $i < 2101 && $offset > 0; ++$i) {
             $daysOfYear = $this->daysOfYear($i);
             $offset -= $daysOfYear;
