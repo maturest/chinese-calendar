@@ -5,13 +5,13 @@
 # Installing
 
 ```shell
-$ composer require overtrue/chinese-calendar -vvv
+$ composer require maturest/chinese-calendar -vvv
 ```
 
 # Usage
 
 ```php
-use Overtrue\ChineseCalendar\Calendar;
+use Maturest\ChineseCalendar\Calendar;
 
 date_default_timezone_set('PRC'); 
 

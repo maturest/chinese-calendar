@@ -5,9 +5,9 @@
  * Time: 8:54 AM.
  */
 
-namespace Overtrue\ChineseCalendar\Tests;
+namespace Maturest\ChineseCalendar\Tests;
 
-use Overtrue\ChineseCalendar\Calendar;
+use Maturest\ChineseCalendar\Calendar;
 use PHPUnit\Framework\TestCase;
 
 class CalendarTest extends TestCase

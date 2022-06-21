@@ -1,5 +1,5 @@
 {
-    "name": "overtrue/chinese-calendar",
+    "name": "maturest/chinese-calendar",
     "description": "中国农历转换与查询工具",
     "keywords": ["chinese", "calendar", "lunar", "solar", "solar2lunar", "lunar2solar"],
     "type": "library",
@@ -11,13 +11,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Overtrue\\ChineseCalendar\\": "src"
+            "Maturest\\ChineseCalendar\\": "src"
         }
     },
     "license": "MIT",
     "authors": [
         {
-            "name": "overtrue",
+            "name": "maturest",
             "email": "anzhengchao@gmail.com"
         }
     ]

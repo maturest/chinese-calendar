@@ -1,13 +1,13 @@
 <?php
 
 /*
- * This file is part of the overtrue/chinese-calendar.
- * (c) overtrue <i@overtrue.me>
+ * This file is part of the maturest/chinese-calendar.
+ * (c) maturest <i@maturest.me>
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
  */
 
-namespace Overtrue\ChineseCalendar;
+namespace Maturest\ChineseCalendar;
 
 use DateTime;
 use DateTimeZone;
@@ -16,7 +16,7 @@ use InvalidArgumentException;
 /**
  * Class Calendar.
  *
- * @author overtrue <i@overtrue.me>
+ * @author Maturest <i@Maturest.me>
  */
 class Calendar
 {
@@ -1145,7 +1145,7 @@ class Calendar
      *
      * @return \DateTime
      */
-    protected function makeDate($string = 'now', $timezone = 'PRC')
+    protected function makeDate($string = 'now', $timezone = 'UTC')
     {
         return new DateTime($string, new DateTimeZone($timezone));
     }
