@@ -230,7 +230,7 @@ class Calendar
                 'gregorian_day' => sprintf('%02d', $day),
                 'gregorian_hour' => !is_numeric($hour) || $hour < 0 || $hour > 23 ? null : sprintf('%02d', $hour),
                 'week_no' => $week, // 在周日时将会传回 0
-                'week_name' => '星期'.$this->weekdayAlias[$week],
+                'week_name' => '星期' . $this->weekdayAlias[$week],
                 'is_today' => 0 === $this->makeDate('now')->diff($date)->days,
                 'constellation' => $this->toConstellation($month, $day),
                 'is_same_year' => $lunar['lunar_year'] == $year ?: false,
@@ -376,10 +376,14 @@ class Calendar
          */
         $adjust = null !== $termIndex && 3 > $termIndex ? 1 : 0;
 
+        if ($lunarYear == 1976) {
+            $adjust = 0;
+        }
+
         $ganKey = ($lunarYear + $adjust - 4) % 10;
         $zhiKey = ($lunarYear + $adjust - 4) % 12;
 
-        return $this->gan[$ganKey].$this->zhi[$zhiKey];
+        return $this->gan[$ganKey] . $this->zhi[$zhiKey];
     }
 
     /**
@@ -412,7 +416,7 @@ class Calendar
      */
     public function toGanZhi($offset)
     {
-        return $this->gan[$offset % 10].$this->zhi[$offset % 12];
+        return $this->gan[$offset % 10] . $this->zhi[$offset % 12];
     }
 
     /**
@@ -477,7 +481,7 @@ class Calendar
             throw new InvalidArgumentException("错误的月份:{$month}");
         }
 
-        return $this->monthAlias[abs($month) - 1].'月';
+        return $this->monthAlias[abs($month) - 1] . '月';
     }
 
     /**
@@ -497,7 +501,7 @@ class Calendar
             case 30:
                 return '三十';
             default:
-                return $this->dateAlias[intval($day / 10)].$this->weekdayAlias[$day % 10];
+                return $this->dateAlias[intval($day / 10)] . $this->weekdayAlias[$day % 10];
         }
     }
 
@@ -515,6 +519,10 @@ class Calendar
     {
         // 认为此逻辑不需要，详情参见 ganZhiYear 相关注释
         $adjust = null !== $termIndex && 3 > $termIndex ? 1 : 0;
+
+        if ($year == 1976) {
+            $adjust = 0;
+        }
 
         $animalIndex = ($year + $adjust - 4) % 12;
 
@@ -566,7 +574,7 @@ class Calendar
         $wGan = $this->wuXing[array_search($gan, $this->gan)];
         $wZhi = $this->zhiWuxing[array_search($zhi, $this->zhi)];
 
-        return $wGan.$wZhi;
+        return $wGan . $wZhi;
     }
 
     /**
@@ -698,7 +706,7 @@ class Calendar
             'lunar_day' => sprintf('%02d', $lunarDay),
             'lunar_hour' => $hour,
             'lunar_year_chinese' => $this->toChinaYear($lunarYear),
-            'lunar_month_chinese' => ($isLeap ? '闰' : '').$this->toChinaMonth($lunarMonth),
+            'lunar_month_chinese' => ($isLeap ? '闰' : '') . $this->toChinaMonth($lunarMonth),
             'lunar_day_chinese' => $this->toChinaDay($lunarDay),
             'lunar_hour_chinese' => $lunarHour,
             'ganzhi_year' => $ganZhiYear,
@@ -766,7 +774,7 @@ class Calendar
         $isAdd = false;
         for ($i = 1; $i < $month; ++$i) {
             $leap = $this->leapMonth($year);
-            if (!$isAdd) {// 处理闰月
+            if (!$isAdd) { // 处理闰月
                 if ($leap <= $i && $leap > 0) {
                     $offset += $this->leapDays($year);
                     $isAdd = true;
@@ -1121,7 +1129,7 @@ class Calendar
         $solar =
             $this->lunar2solar($lunar['lunar_year'], $lunar['lunar_month'], $lunar['lunar_day'], $lunar['is_leap']);
         $date = $this->makeDate("{$solar['solar_year']}-{$solar['solar_month']}-{$solar['solar_day']}");
-        $date->modify($value.' day');
+        $date->modify($value . ' day');
 
         return $this->solar2lunar($date->format('Y'), $date->format('m'), $date->format('d'));
     }
@@ -1172,8 +1180,8 @@ class Calendar
         $zhiHour = 12 === $zhiHour ? 0 : $zhiHour;
 
         return [
-            $this->gan[($ganZhiDay % 10 % 5 * 2 + $zhiHour) % 10].$this->zhi[$zhiHour],
-            $this->zhi[$zhiHour].'时',
+            $this->gan[($ganZhiDay % 10 % 5 * 2 + $zhiHour) % 10] . $this->zhi[$zhiHour],
+            $this->zhi[$zhiHour] . '时',
             sprintf('%02d', $hour),
         ];
     }
