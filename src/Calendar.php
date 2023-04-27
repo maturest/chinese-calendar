@@ -374,11 +374,7 @@ class Calendar
          *
          * 即使考虑节气，有的年份没有立春，有的年份有两个立春，此处逻辑仍不能处理该特殊情况
          */
-        $adjust = null !== $termIndex && 3 > $termIndex ? 1 : 0;
-
-        if ($lunarYear == 1976) {
-            $adjust = 0;
-        }
+        $adjust = null !== $termIndex && 3 <= $termIndex ? 1 : 0;
 
         $ganKey = ($lunarYear + $adjust - 4) % 10;
         $zhiKey = ($lunarYear + $adjust - 4) % 12;
@@ -518,7 +514,7 @@ class Calendar
     public function getAnimal($year, $termIndex = null)
     {
         // 认为此逻辑不需要，详情参见 ganZhiYear 相关注释
-        $adjust = null !== $termIndex && 3 > $termIndex ? 1 : 0;
+        $adjust = null !== $termIndex && 3 <= $termIndex ? 1 : 0;
 
         if ($year == 1976) {
             $adjust = 0;
