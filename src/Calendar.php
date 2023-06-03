@@ -374,12 +374,19 @@ class Calendar
          *
          * 即使考虑节气，有的年份没有立春，有的年份有两个立春，此处逻辑仍不能处理该特殊情况
          */
-        $adjust = null !== $termIndex && 3 <= $termIndex ? 1 : 0;
+        // $adjust = null !== $termIndex && 3 <= $termIndex ? 1 : 0;
 
-        $ganKey = ($lunarYear + $adjust - 4) % 10;
-        $zhiKey = ($lunarYear + $adjust - 4) % 12;
+        // $ganKey = ($lunarYear + $adjust - 4) % 10;
+        // $zhiKey = ($lunarYear + $adjust - 4) % 12;
 
-        return $this->gan[$ganKey] . $this->zhi[$zhiKey];
+        // return $this->gan[$ganKey] . $this->zhi[$zhiKey];
+
+        $ganKey = ($lunarYear - 3) % 10;
+        $zhiKey = ($lunarYear - 3) % 12;
+        if ($ganKey == 0) $ganKey = 10; //如果余数为0则为最后一个天干
+        if ($zhiKey == 0) $zhiKey = 12; //如果余数为0则为最后一个地支
+
+        return $this->gan[$ganKey - 1] . $this->zhi[$zhiKey - 1];
     }
 
     /**
@@ -514,13 +521,17 @@ class Calendar
     public function getAnimal($year, $termIndex = null)
     {
         // 认为此逻辑不需要，详情参见 ganZhiYear 相关注释
-        $adjust = null !== $termIndex && 3 <= $termIndex ? 1 : 0;
+        // $adjust = null !== $termIndex && 3 <= $termIndex ? 1 : 0;
 
-        if ($year == 1976) {
-            $adjust = 0;
-        }
+        // if ($year == 1976) {
+        //     $adjust = 0;
+        // }
 
-        $animalIndex = ($year + $adjust - 4) % 12;
+        // $animalIndex = ($year + $adjust - 4) % 12;
+
+        // return $this->animals[$animalIndex];
+
+        $animalIndex = ($year - 4) % 12;
 
         return $this->animals[$animalIndex];
     }
